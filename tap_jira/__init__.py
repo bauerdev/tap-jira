@@ -80,7 +80,7 @@ def generate_metadata(stream, schema):
 
 
 def output_schema(stream):
-    schema = load_schema(stream.tap_stream_id)
+    schema = Context.catalog.get_stream(stream.tap_stream_id).schema.to_dict()
     singer.write_schema(stream.tap_stream_id, schema, stream.pk_fields)
 
 
