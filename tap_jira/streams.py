@@ -278,7 +278,7 @@ class Issues(Stream):
                   "validateQuery": "strict",
                   "jql": jql}
 
-        field_names = self.get_issue_field_map(client)
+#         field_names = self.get_issue_field_map(client)
         for page, cursor in client.fetch_pages(
                 self.tap_stream_id,
                 self.endpoint,
@@ -288,8 +288,8 @@ class Issues(Stream):
         ):
             # New page contains all issues for a page
             # with renamed custom fields
-            new_page = [self.rename_fields(r, field_names) for r in page]
-            yield new_page, cursor
+#             new_page = [self.rename_fields(r, field_names) for r in page]
+            yield page, cursor
 
 
 class IssueComments(Stream):

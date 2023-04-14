@@ -119,7 +119,7 @@ class Client:
             response = self.send(*args, **kwargs)
             self.next_request_at = datetime.now() + TIME_BETWEEN_REQUESTS
             timer.tags[metrics.Tag.http_status_code] = response.status_code
-        if response.status_code == 429:
+        if response.status_code == 429 or response.status_code == 403:
             raise RateLimitException()
         response.raise_for_status()
         return response.json()
