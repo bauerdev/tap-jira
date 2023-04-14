@@ -1,6 +1,5 @@
 from datetime import datetime
 from singer import utils, metadata
-from .http import check_status
 
 
 class Context():
@@ -57,5 +56,5 @@ class Context():
     @classmethod
     def retrieve_timezone(cls):
         response = cls.client.send("GET", "/rest/api/2/myself")
-        check_status(response)
+        response.raise_for_status()
         return response.json()["timeZone"]
